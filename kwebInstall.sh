@@ -7,6 +7,6 @@ cd kweb-1.7.1
 ./debinstall
 
 # Install dependencies
-sudo apt-get install xterm uget evince lxterminal tint2
+sudo apt-get install xterm uget evince lxterminal tint2 xinit
 
 echo 'manual at : http://steinerdatenbank.de/software/kweb_manual.pdf'
