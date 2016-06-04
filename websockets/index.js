@@ -1,7 +1,8 @@
 var express = require('express'); //Our http server
 var morgan = require('morgan'); // A rather nice logger
-var debug = require('tracer').colorConsole({level:'info'}); // Debugger
+var debug = require('tracer').colorConsole({level:'log'}); // Debugger
 // var wpi = require('wiring-pi');
+
 var port = process.env.PORT || 3000; // If env var PORT is set, use it, or default to 3000
 
 // Start building our server
@@ -39,12 +40,28 @@ server.listen(port, function () {
   debug.info('App listening on port', port);
 });
 
-io.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-});
 
+
+io.on('connection', function (socket) {
+  debug.log('A connection has happened');
+
+  var wait = function(){
+    var imgArray = [
+      '/img/DeathtoStock_NotStock.jpg',
+      '/img/DeathtoStock_NotStock2.jpg',
+      '/img/DeathtoStock_NotStock3.jpg',
+      '/img/DeathtoStock_NotStock4.jpg',
+      '/img/DeathtoStock_NotStock5.jpg',
+      '/img/DeathtoStock_NotStock6.jpg',
+      '/img/DeathtoStock_NotStock7.jpg',
+      '/img/DeathtoStock_NotStock8.jpg'
+    ];
+    var image = imgArray[Math.floor(Math.random()*imgArray.length)];
+    socket.emit('img', image );
+    console.log(image);
+    setTimeout(wait, 1000);
+  };
+  wait();
+});
 
 module.exports = app;

@@ -1,28 +1,20 @@
-var socket = io.connect('http://localhost:3000');
+var socket = io.connect();
 
-preloadImages([
-  'http://localhost:3000/img/DeathtoStock_NotStock.jpg',
-  'http://localhost:3000/img/DeathtoStock_NotStock2.jpg',
-  'http://localhost:3000/img/DeathtoStock_NotStock3.jpg',
-  'http://localhost:3000/img/DeathtoStock_NotStock4.jpg',
-  'http://localhost:3000/img/DeathtoStock_NotStock5.jpg',
-  'http://localhost:3000/img/DeathtoStock_NotStock6.jpg',
-  'http://localhost:3000/img/DeathtoStock_NotStock7.jpg',
-  'http://localhost:3000/img/DeathtoStock_NotStock8.jpg'
-]);
+preloadImages(imgArray);
 
 
-socket.on('news', function (data) {
+socket.on('img', function (data) {
   console.log(data);
-  socket.emit('my other event', { my: 'data' });
+  changeImage(data);
 });
 
 
-var list = preloadImages.list;
 
-var changeImage = function (list) {
-  var image = list[Math.floor(Math.random() * list.length)];
-  $('#image-div').prepend($('<img>',{id:'theImg',src: image.src}).addClass('full'));
+var changeImage = function (list ) {
+  var div = $('#image-div')
+  var image = list;
+  div.empty();
+  div.prepend($('<img>',{id:'theImg',src: image}).addClass('full'));
 };
 
-changeImage(list);
+//changeImage(list, Math.floor(Math.random() * list.length));
