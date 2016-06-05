@@ -14,7 +14,7 @@ var changeImage = function (list ) {
   var div = $('#image-div')
   var image = list;
   div.empty();
-  div.prepend($('<img>',{id:'theImg',src: image}).addClass('full'));
+  div.prepend($('<img>',{id:'theImg',src: image}).width(screen.width));
 };
 
 //changeImage(list, Math.floor(Math.random() * list.length));

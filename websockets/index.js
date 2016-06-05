@@ -59,7 +59,7 @@ io.on('connection', function (socket) {
     var image = imgArray[Math.floor(Math.random()*imgArray.length)];
     socket.emit('img', image );
     console.log(image);
-    setTimeout(wait, 1000);
+    setTimeout(wait, 5000);
   };
   wait();
 });
