@@ -1,6 +1,8 @@
 var express = require('express'); //Our http server
 var morgan = require('morgan'); // A rather nice logger
 var debug = require('tracer').colorConsole({level:'log'}); // Debugger
+
+
 // var wpi = require('wiring-pi');
 
 var port = process.env.PORT || 3000; // If env var PORT is set, use it, or default to 3000
@@ -41,7 +43,6 @@ server.listen(port, function () {
 });
 
 
-
 io.on('connection', function (socket) {
   debug.log('A connection has happened');
 
@@ -58,7 +59,7 @@ io.on('connection', function (socket) {
     ];
     var image = imgArray[Math.floor(Math.random()*imgArray.length)];
     socket.emit('img', image );
-    console.log(image);
+    debug.info(image);
     setTimeout(wait, 5000);
   };
   wait();
